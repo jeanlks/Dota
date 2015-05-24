@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -31,7 +32,12 @@ public class MainActivity extends ActionBarActivity {
         mToolBar.setLogo(R.drawable.ic_xbox_controller);
         setSupportActionBar(mToolBar);
         mToolBarBottom = (Toolbar) findViewById(R.id.tb_bottom);
-
+        mToolBarBottom.findViewById(R.id.iv_settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"Settings Pressionado",Toast.LENGTH_SHORT).show();
+            }
+        });
         mToolBarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
