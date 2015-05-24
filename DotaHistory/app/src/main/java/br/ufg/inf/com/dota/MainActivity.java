@@ -31,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
         mToolBar.setLogo(R.drawable.ic_xbox_controller);
         setSupportActionBar(mToolBar);
         mToolBarBottom = (Toolbar) findViewById(R.id.tb_bottom);
+
         mToolBarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -40,12 +41,31 @@ public class MainActivity extends ActionBarActivity {
                         it = new Intent(Intent.ACTION_VIEW);
                         it.setData(Uri.parse("http://www.facebook.com"));
                         break;
+
+                    case R.id.action_google_plus:
+                        it = new Intent(Intent.ACTION_VIEW);
+                        it.setData(Uri.parse("http://www.google.com"));
+                        break;
+                    case R.id.action_whatsapp:
+                        it = new Intent(Intent.ACTION_VIEW);
+                        it.setData(Uri.parse("http://www.whatsapp.com"));
+                        break;
+                    case R.id.action_youtube:
+                        it = new Intent(Intent.ACTION_VIEW);
+                        it.setData(Uri.parse("http://www.youtube.com"));
+                        break;
+                    case R.id.action_linkedin:
+                        it = new Intent(Intent.ACTION_VIEW);
+                        it.setData(Uri.parse("http://www.linkedin.com"));
+                        break;
                 }
                 startActivity(it);
 
                 return true;
             }
         });
+
+       mToolBarBottom.inflateMenu(R.menu.menu_toolbar_bottom);
 
         }
 

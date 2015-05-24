@@ -19,7 +19,7 @@
     app:theme="@style/ThemeOverlay.AppCompat.Light"/>
 
 <include
-    android:id="@+id/inc_tb_bottom"
+    android:id="@+id/tb_bottom"
     layout="@layout/toolbar_bottom">
 
 </include>
