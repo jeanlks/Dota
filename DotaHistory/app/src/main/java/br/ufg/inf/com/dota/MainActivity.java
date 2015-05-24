@@ -1,5 +1,7 @@
 package br.ufg.inf.com.dota;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
@@ -12,8 +14,8 @@ import android.view.ViewGroup;
 
 
 public class MainActivity extends ActionBarActivity {
- private android.support.v7.widget.Toolbar mToolBar;
- private android.support.v7.widget.Toolbar mToolBarBottom;
+ private Toolbar mToolBar;
+ private Toolbar mToolBarBottom;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,25 @@ public class MainActivity extends ActionBarActivity {
         mToolBar = (Toolbar) findViewById(R.id.tbMain);
         mToolBar.setTitle("Match History");
         mToolBar.setLogo(R.drawable.ic_xbox_controller);
-    }
+        setSupportActionBar(mToolBar);
+        mToolBarBottom = (Toolbar) findViewById(R.id.tb_bottom);
+        mToolBarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent it = null;
+                switch (item.getItemId()){
+                    case R.id.action_facebook:
+                        it = new Intent(Intent.ACTION_VIEW);
+                        it.setData(Uri.parse("http://www.facebook.com"));
+                        break;
+                }
+                startActivity(it);
+
+                return true;
+            }
+        });
+
+        }
 
 
     @Override
