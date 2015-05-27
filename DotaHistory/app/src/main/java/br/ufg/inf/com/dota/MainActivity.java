@@ -6,17 +6,28 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
+
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 
 public class MainActivity extends ActionBarActivity {
- private Toolbar mToolBar;
- private Toolbar mToolBarBottom;
+    private Toolbar mToolBar;
+    private Toolbar mToolBarBottom;
+    private Drawer navigationDrawerLeft;
+     private Drawer navigationDrawerRight;
+    private AccountHeader headerNavigationLeft;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +46,14 @@ public class MainActivity extends ActionBarActivity {
         mToolBarBottom.findViewById(R.id.iv_settings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Settings Pressionado",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Settings Pressionado", Toast.LENGTH_SHORT).show();
             }
         });
         mToolBarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent it = null;
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.action_facebook:
                         it = new Intent(Intent.ACTION_VIEW);
                         it.setData(Uri.parse("http://www.facebook.com"));
@@ -71,9 +82,33 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-       mToolBarBottom.inflateMenu(R.menu.menu_toolbar_bottom);
+        mToolBarBottom.inflateMenu(R.menu.menu_toolbar_bottom);
 
-        }
+        //NAVIGATION DRAWER
+        navigationDrawerLeft = new DrawerBuilder()
+                .withActivity(this)
+                .withDisplayBelowToolbar(true)
+                .withActionBarDrawerToggleAnimated(true)
+                .withDrawerGravity(Gravity.LEFT)
+                .withSavedInstance(savedInstanceState)
+                .withSelectedItem(0)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
+                        return false;
+                    }
+                })
+                .withOnDrawerItemLongClickListener(new Drawer.OnDrawerItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
+                        Toast.makeText(MainActivity.this,"OnItemLongClick",Toast.LENGTH_SHORT).show();
+                        return false;
+                    }
+                })
+                .build();
+
+        navigationDrawerLeft.addItem(new PrimaryDrawerItem().withName("Cadastrar Info").withIcon(R.drawable.ic_account_plus));
+    }
 
 
     @Override
@@ -87,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-      // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
