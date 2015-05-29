@@ -18,7 +18,7 @@ import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import fragments.fragmentMain;
+import br.ufg.inf.com.dota.fragments.fragmentMain;
 
 
 public class MainActivity extends ActionBarActivity {

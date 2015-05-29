@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="58dp"
     android:paddingTop="57dp"
-    tools:context="br.ufg.inf.com.dota.fragments.fragmentMain">
+    tools:context="br.ufg.inf.com.dota.br.ufg.inf.com.dota.fragments.fragmentMain">
 
 
     <android.support.v7.widget.RecyclerView
