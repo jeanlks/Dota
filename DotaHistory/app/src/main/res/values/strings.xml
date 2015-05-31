@@ -6,4 +6,8 @@
     <string name="action_google_plus">Google</string>
     <string name="action_linkedin">Linkedin</string>
     <string name="action_whatsapp">Whatsapp</string>
+    <string name="pref_id_steam" translatable="false">id</string>
+    <string name="pref_id_steam_default" translatable="false">86653136</string>
+    <string name="pref_id_steam_label" translatable="false">ID Steam</string>
+    <string name="title_activity_settings" >Settings</string>
 </resources>

@@ -1,4 +1,4 @@
-package model;
+package br.ufg.inf.com.dota.model;
 
 import java.util.ArrayList;
 

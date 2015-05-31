@@ -18,7 +18,7 @@ import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
-import br.ufg.inf.com.dota.fragments.fragmentMain;
+import br.ufg.inf.com.dota.fragments.FragmentMain;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new fragmentMain())
+                    .add(R.id.container, new FragmentMain())
                     .commit();
         }
 
@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
         mToolBarBottom.findViewById(R.id.iv_settings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Settings Pressionado", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
             }
         });
         mToolBarBottom.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -127,6 +127,7 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
             return true;
         }
 

@@ -7,4 +7,5 @@
     <string name="action_google_plus">Google</string>
     <string name="action_linkedin">Linkedin</string>
     <string name="action_whatsapp">Whatsapp</string>
+    <string name="title_activity_settings" >Configurações</string>
 </resources>

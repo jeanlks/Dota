@@ -1,4 +1,4 @@
-package model;
+package br.ufg.inf.com.dota.model;
 
 /**
  * Created by Jean on 24/05/2015.

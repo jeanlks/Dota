@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufg.inf.com.dota.R;
-import model.Match;
+import br.ufg.inf.com.dota.model.Match;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> {
     private Context mContext;
@@ -39,8 +39,8 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder ViewHolder, int position) {
-        Log.i(MatchAdapter.class.getName(),Integer.toString(mList.get(position).getMatch_id()));
-        ViewHolder.textView.setText(Integer.toString(mList.get(position).getMatch_id()));
+        Log.i(MatchAdapter.class.getName(),mList.get(position).getMatch_id());
+        ViewHolder.textView.setText(mList.get(position).getMatch_id());
 
     }
 

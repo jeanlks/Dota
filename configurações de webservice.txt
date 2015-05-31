@@ -1,5 +1,5 @@
 chave dota : F5E7B4E54808E4554C04D44A448F585C
-steam id jeanlucasrv : 76561198046918864
+steam id jeanlucasrv : 76561198046918864 ou 86653136
 steam id jeanlks :76561198129602912
 Pegar Historico de partidas por player id : https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/V001/?key=<key>&account_id=XXXXX
 
