@@ -3,12 +3,20 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:id="@+id/item_match">
 
     <TextView
-        android:id="@+id/matchID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/tvHero"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
 
     <View
         android:id="@+id/vw_divider"

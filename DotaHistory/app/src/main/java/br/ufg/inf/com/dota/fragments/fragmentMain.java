@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,24 +30,12 @@ import br.ufg.inf.com.dota.model.Match;
 import br.ufg.inf.com.dota.utils.Utils;
 
 public class FragmentMain extends Fragment {
+    private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private List<Match> mList = new ArrayList<>();
     MatchAdapter adapter;
 
-    public FragmentMain() {
-    }
 
-    @Override
-    public void onResume() {
-        updateList();
-        super.onResume();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,16 +50,28 @@ public class FragmentMain extends Fragment {
         mRecyclerView.setLayoutManager(llm);
 
 
-        updateList();
+        //Swipe Refresh Layout Aqui
+        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.srl_swipe);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                updateList();
+                mSwipeRefreshLayout.setRefreshing(false);
 
+            }});
         return rootView;
     }
 
-    private void updateList() {
-        FetchJson JsonTask = new FetchJson();
-        JsonTask.execute();
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateList();
     }
 
+    private void updateList(){
+    FetchJson fetchJson = new FetchJson();
+    fetchJson.execute();
+}
     public class FetchJson extends AsyncTask<List, Void, List> {
 
         private final String LOG_TAG = FetchJson.class.getSimpleName();
@@ -79,12 +79,7 @@ public class FragmentMain extends Fragment {
         /* The date/time conversion code is going to be moved outside the asynctask later,
          * so for convenience we're breaking it out into its own method now.
          */
-        private String getReadableDateString(long time) {
-            // Because the API returns a unix timestamp (measured in seconds),
-            // it must be converted to milliseconds in order to be converted to valid date.
-            SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
-            return shortenedDateFormat.format(time);
-        }
+
 
 
 
@@ -92,7 +87,7 @@ public class FragmentMain extends Fragment {
 
         @Override
         protected List doInBackground(List... params) {
-
+            Log.v("doInBackground","Passou aqi");
             Utils utils = new Utils();
 
             // These two need to be declared outside the try/catch
@@ -124,7 +119,7 @@ public class FragmentMain extends Fragment {
                 // Create the request to OpenWeatherMap, and open the connection
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
-                urlConnection.setConnectTimeout(2000);
+                urlConnection.setConnectTimeout(10000);
                 urlConnection.connect();
 
 
@@ -170,7 +165,6 @@ public class FragmentMain extends Fragment {
             }
 
             try {
-
               return utils.getMatchDataFromJson(JsonStr);
             } catch (JSONException e) {
                 Log.e(LOG_TAG, e.getMessage(), e);

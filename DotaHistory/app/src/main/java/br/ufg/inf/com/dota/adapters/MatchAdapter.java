@@ -1,6 +1,8 @@
 package br.ufg.inf.com.dota.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import br.ufg.inf.com.dota.R;
 import br.ufg.inf.com.dota.model.Match;
+import br.ufg.inf.com.dota.utils.Utils;
 
 public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> {
     private Context mContext;
@@ -20,8 +23,7 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     private LayoutInflater mLayoutInflater;
 
 
-
-    public MatchAdapter(Context c, List<Match> l){
+    public MatchAdapter(Context c, List<Match> l) {
         mContext = c;
         mList = l;
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -39,9 +41,14 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder ViewHolder, int position) {
-        Log.i(MatchAdapter.class.getName(),mList.get(position).getMatch_id());
-        ViewHolder.textView.setText(mList.get(position).getMatch_id());
-
+        Utils utils = new Utils();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext.getApplicationContext());
+        String steamID = prefs.getString(mContext.getString(R.string.pref_id_steam),
+               mContext.getString(R.string.pref_id_steam_default));
+        Log.v("steamID: ",steamID);
+        ViewHolder.textViewHero.setText(utils.findHeroNameByAccount(mList, position, steamID));
+        Log.v("Data: ", utils.getReadableDateString(mList.get(position).getStart_time()));
+        ViewHolder.textViewTime.setText(utils.getReadableDateString(mList.get(position).getStart_time()));
     }
 
     @Override
@@ -50,27 +57,26 @@ public class MatchAdapter extends RecyclerView.Adapter<MatchAdapter.ViewHolder> 
     }
 
 
-
-    public void addListItem(Match c, int position){
+    public void addListItem(Match c, int position) {
         mList.add(c);
         notifyItemInserted(position);
     }
 
 
-    public void removeListItem(int position){
+    public void removeListItem(int position) {
         mList.remove(position);
         notifyItemRemoved(position);
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder  {
-        public TextView textView;
-
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView textViewHero;
+        public TextView textViewTime;
         public ViewHolder(View itemView) {
             super(itemView);
 
-            textView = (TextView) itemView.findViewById(R.id.matchID);
-
+            textViewHero = (TextView) itemView.findViewById(R.id.tvHero);
+            textViewTime = (TextView) itemView.findViewById(R.id.tvTime);
 
         }
 

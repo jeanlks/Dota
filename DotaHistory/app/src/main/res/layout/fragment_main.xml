@@ -6,11 +6,17 @@
     android:paddingTop="57dp"
     tools:context="br.ufg.inf.com.dota.br.ufg.inf.com.dota.fragments.FragmentMain">
 
-
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/srl_swipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+</android.support.v4.widget.SwipeRefreshLayout>
+
 
 
 </FrameLayout>

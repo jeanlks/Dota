@@ -12,7 +12,7 @@ public class Match {
     private String lobby_type;
     private String radiant_team_id;
     private String dire_team_id;
-
+    private ArrayList<Player> players = new ArrayList<>();
     public String getRadiant_team_id() {
         return radiant_team_id;
     }
@@ -29,7 +29,7 @@ public class Match {
         this.dire_team_id = dire_team_id;
     }
 
-    private ArrayList<Player> players = new ArrayList<>();
+
 
     public String getMatch_id() {
         return match_id;
