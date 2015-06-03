@@ -1,28 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Layout for weather forecast list item for future day (not today) -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-
+    android:id="@+id/item_match"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:id="@+id/item_match">
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvHero"
-        android:layout_width="175dp"
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center" />
+        android:layout_weight="7"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvHero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="20sp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textAlignment="center" />
+        android:layout_gravity="center"
+        android:layout_weight="5"
+        android:orientation="vertical">
 
-    <View
-        android:id="@+id/vw_divider"
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed"
+            android:textAppearance="?android:textAppearanceLarge" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
